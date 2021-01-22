@@ -4,7 +4,7 @@ import { TextField, Button, Typography, Paper } from '@material-ui/core';
 import { useState, useEffect } from 'react';
 import FileBase from 'react-file-base64';
 import { useDispatch } from 'react-redux';
-import { createPost, updatePost } from '../../actions/posts';
+import { createPost } from '../../actions/posts';
 
 const Form = () => {
   const [postData, setPostData] = useState({
@@ -20,17 +20,18 @@ const Form = () => {
     e.preventDefault();
     dispatch(createPost(postData));
   };
+
   const clear = () => {};
 
   return (
-    <Paper className="{classes.paper}">
+    <Paper className={classes.paper}>
       <form
         autoComplete="off"
         noValidate
         className={`${classes.root} ${classes.form}`}
         onSubmit={handleSubmit}
       >
-        <Typography variant="h6">Creating a Moment</Typography>
+        <Typography variant="h6">Creating a Memory</Typography>
         <TextField
           name="creator"
           variant="outlined"
@@ -54,6 +55,8 @@ const Form = () => {
           variant="outlined"
           label="Message"
           fullWidth
+          multiline
+          rows={4}
           value={postData.message}
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
@@ -80,7 +83,7 @@ const Form = () => {
         </div>
         <Button
           className={classes.buttonSubmit}
-          varient="contained"
+          variant="contained"
           color="primary"
           size="large"
           type="submit"
@@ -89,7 +92,7 @@ const Form = () => {
           Submit
         </Button>
         <Button
-          varient="contained"
+          variant="contained"
           color="secondary"
           size="small"
           onClick={clear}
